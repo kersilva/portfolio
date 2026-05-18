@@ -1,5 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
 * {
     font-family: "Montserrat", sans-serif;
+} 
+https://benrmartin.com    
+https://perryw-2023.webflow.io/stadia-bluetooth
+*/
+
+.glow-border {
+  border-top: 1px solid transparent;
+  
+  border-image: linear-gradient(
+    to right, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  ) 1;
 }
