@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 256 280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <path id="Cima" d="M0.82,52.941L15.188,0L33.66,0L24.131,35.113L91.117,35.113L38.545,228.825L72.716,228.825L125.288,35.113L200.623,35.113L210.152,0L228.624,0L214.257,52.941L138.922,52.941L86.35,246.652L15.234,246.652L67.806,52.941L0.82,52.941Z" style="fill:white;"/>
+    <path id="Baixo" d="M255.458,35.113L241.608,86.144L166.616,86.144L114.005,280L41.751,280L46.589,262.173L100.371,262.173L152.983,68.317L227.974,68.317L236.985,35.113L255.458,35.113Z" style="fill:white;"/>
+</svg>

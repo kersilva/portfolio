@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Kelwin</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://api.fontshare.com/v2/css?f[]=alpino@1&f[]=boska@1,2&display=swap" rel="stylesheet">
+    
+    <style type="text/tailwindcss">
+        @theme {
+            /* Registramos a variável do brilho que você está usando */
+            --drop-shadow-glow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Criamos a classe personalizada combinando as classes do Tailwind v4 */
+        @utility text-highlight {
+            font-weight: var(--font-weight-semibold);
+            background-image: linear-gradient(to bottom, var(--color-white), var(--color-stone-300));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            filter: drop-shadow(var(--drop-shadow-glow));
+        }
+    </style>
+    
+    <style>
+        * {
+            font-family: 'Alpino', sans-serif;
+        }
+        
+        .boska {
+            font-family: 'Boska', serif;
+        }
+        
+        .link-hover {
+            position: relative;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            height: 4px;
+            width: 0;
+            background-color: white;
+            transition: all 300ms ease-in-out;
+        }
+        
+        .link-hover:hover::after {
+            width: 100%;
+        }
+
+        [data-navbar] {
+            position: relative;
+        }
+
+        [data-navbar]::before {
+            content: attr(data-navbar);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            border-radius: 9999px;
+            color: white;
+            font-size: 1rem;
+            transform: translateX(-50%) scale(0);
+            border-width: 1px;
+            background-color: rgb(255 255 255 / 0.05);
+            border-color: rgb(255 255 255 / 0.1);
+            width: max-content;
+            padding: 0.2rem 1rem;
+            opacity: 0;
+            transition: all 300ms ease-in-out;
+        }
+
+        [data-navbar]:hover::before {
+            opacity: 1;
+            bottom: -50px;
+            transform: translateX(-50%) scale(1);
+        }
+
+        [data-navbar] i.icon-outline {
+            opacity: 1;
+            transition: all 300ms ease-in-out;
+        }
+
+        [data-navbar] i.icon-fill {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            opacity: 0;
+            transition: all 300ms ease-in-out;
+        }
+
+        [data-navbar]:hover i.icon-outline {
+            opacity: 0;
+        }
+
+        [data-navbar]:hover i.icon-fill {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-[#050506] text-white relative">
+    <div class="fixed -z-50 w-dvw h-dvh">
+        <div class="absolute size-600 bg-[#F4F4F6]/7 rounded-b-full -translate-x-1/2 -translate-y-1/2 left-1/2 -top-275 blur-[200px] mix-blend-plus-lighter"></div>
+    </div>
+<div class="fixed z-50 w-screen h-fit flex p-5">
+  <div class="mx-auto flex bg-white/5 border gap-10 hover:gap-12 group border-white/10 p-1 rounded-full text-lg backdrop-blur-2xl shadow-lg transition-all duration-300 ease-in-out items-center">
+    <nav class="flex justify-between gap-4 hover:gap-6 group-hover:gap-6 ease-in-out transition-all duration-300 [&>a]:py-1 [&>a]:px-3 [&>a]:hover:px-5 [&>a]:rounded-full [&>a]:hover:bg-white/10 [&>a]:lowercase [&>a]:ease-in-out [&>a]:transition-all [&>a]:duration-300 [&>a]:relative">
+      <a href="#" data-navbar="home"><i class="bi bi-house icon-outline"></i><i class="bi bi-house-fill icon-fill"></i></a>
+      <a href="#" data-navbar="projetos"><i class="bi bi-folder icon-outline"></i><i class="bi bi-folder-fill icon-fill"></i></a>
+      <a href="#" data-navbar="sobre"><i class="bi bi-person icon-outline"></i><i class="bi bi-person-fill icon-fill"></i></a>
+    </nav>
+    <div class="flex gap-3 group-hover:gap-5 ease-in-out transition-all duration-300">
+        <a href="testes.html" data-navbar="língua: português 🇧🇷" class="px-3 hover:px-5 py-1 rounded-full ease-in-out transition-all duration-300 text-white/50 text-base group/btn cursor-pointer hover:bg-white/10"><span class="group-hover/btn:text-highlight">EN</span> / <span class="text-highlight group-hover/btn:text-white/50 group-hover/btn:drop-shadow-none  group-hover/btn:bg-none group-hover/btn:font-normal">PT</span></a>
+    <button type="button" data-navbar="tema: escuro" class="px-3 hover:px-5 py-1 rounded-full ease-in-out transition-all duration-300 text-base group/btn cursor-pointer hover:bg-white/10"><i class="bi bi-moon icon-outline"></i><i class="bi bi-moon-fill icon-fill"></i></button>
+    </div>
+  </div>
+</div>
+    <main class="flex flex-col [&>section]:min-h-screen [&>section]:w-screen [&>section]:lg:w-[75dvw] [&>section]:mx-auto">
+        <section class="flex flex-col gap-7 justify-center items-center border-x border-stone-900 px-10 text-4xl lg:text-5xl xl:text-6xl text-center">
+            <h1 class="text-wrap w-[90dvw] lg:w-[65%] relative max-w-full text-white/50">
+                fala, sou o
+                <span class="inline-flex items-center p-0.5 border mx-1 bg-black/50 backdrop-blur-[1px] border-white/30 rounded-xl -rotate-5 hover:scale-200 hover:rotate-0 transition-transform duration-300 ease-in-out hover:border-white/50 cursor-pointer z-50">
+                    <img src="https://github.com/kersilva.png" alt="Kelwin's profile picture" class="size-8 lg:size-12 rounded-lg">
+                </span>
+                <span class="text-highlight">kelwin</span>,
+                faço
+                <span class="text-highlight">desenvolvimento de software multiplataforma</span>
+                na
+                <span class="inline-flex text-white bg-white/5 border border-white/10 rounded-full mx-1 py-1.5 px-3 lg:py-3 lg:px-4 items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 280" fill="currentColor" class="size-6 lg:size-8">
+                        <path id="Cima" d="M0.82,52.941L15.188,0L33.66,0L24.131,35.113L91.117,35.113L38.545,228.825L72.716,228.825L125.288,35.113L200.623,35.113L210.152,0L228.624,0L214.257,52.941L138.922,52.941L86.35,246.652L15.234,246.652L67.806,52.941L0.82,52.941Z"/>
+                        <path id="Baixo" d="M255.458,35.113L241.608,86.144L166.616,86.144L114.005,280L41.751,280L46.589,262.173L100.371,262.173L152.983,68.317L227.974,68.317L236.985,35.113L255.458,35.113Z" clip-rule="evenodd"/>
+                    </svg>
+                </span>
+                
+                <a href="https://www.cps.sp.gov.br/fatecs/fatec-sao-jose-dos-campos-prof-jessen-vidal/" class="text-highlight link-hover">Fatec</a>
+            </h1>
+            <div class="text-base flex items-center justify-center bg-white/5 border border-white/10 px-3 py-1 rounded-full gap-3 text-white/90 relative">
+                <span class="relative flex size-2">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-55"></span>
+                    <span class="relative inline-flex size-2 rounded-full bg-green-500 shadow-[0_0_12px_#22c55e]"></span>
+                </span>
+                Disponível para projetos
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
