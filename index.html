@@ -1,349 +1,533 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="scroll-smooth">
+<html lang="pt-br" class="scroll-smooth dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Kelwin's Portfolio</title>
+    <title>Kelwin</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://api.fontshare.com/v2/css?f[]=alpino@1&f[]=boska@1,2&display=swap" rel="stylesheet">
+    
+    <style type="text/tailwindcss">
+        @variant dark (&:where(.dark, .dark *));
+        
+        @theme {
+            --drop-shadow-glow: 0 0 10px rgba(255, 255, 255, 0.2);
+            
+            /* Define os tokens — os valores aqui são só o fallback/padrão do Tailwind */
+            --color-fundo: #f5f5f4;
+            --color-superficie: #ffffff;
+            --color-borda: #d6d3d1;
+            --color-texto: #1c1917;
+            --color-texto-muted: #78716c;
+        }
+        
+        /* Light (padrão) */
+        :root {
+            --color-fundo: #f5f5f4;
+            --color-superficie: #ffffff;
+            --color-borda: #d6d3d1;
+            --color-texto: #1c1917;
+            --color-texto-muted: #78716c;
+        }
+        
+        /* Dark */
+        :root.dark {
+            --color-fundo: #050506;
+            --color-superficie: #1c1917;
+            --color-borda: #292524;
+            --color-texto: #f5f5f4;
+            --color-texto-muted: #a8a29e;
+        }
+        
+        @utility text-highlight {
+            font-weight: var(--font-weight-semibold);
+            background-image: linear-gradient(to bottom, var(--color-white), var(--color-stone-300));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            filter: drop-shadow(var(--drop-shadow-glow));
+        }
+    </style>
+    
+    <script>
+        // Sistema de Tradução
+        const translations = {
+            pt: {
+                'nav-home': 'home',
+                'nav-projects': 'projects',
+                'nav-about': 'sobre',
+                'nav-language': 'language: english 🇺🇸',
+                'home-greeting': 'oi, sou',
+                'home-skill': 'construindo',
+                'home-role': 'aplicações web full-stack',
+                'home-status': 'disponível para projetos',
+                'projects-title': 'projetos em destaque',
+                'project-notepad-title': 'notepad',
+                'project-notepad-tag': 'projeto faculdade',
+                'project-notepad-desc': 'Uma plataforma simples de compartilhamento de notas online onde usuários podem criar e acessar notas através de um código único.',
+                'project-events-title': 'events',
+                'project-events-tag': 'projeto escolar',
+                'project-events-desc': 'Uma plataforma web projetada para ajudar pessoas a descobrir e explorar eventos culturais e atividades.',
+                'project-radar-title': 'radar cidadão',
+                'project-radar-tag': 'projeto faculdade',
+                'project-radar-desc': 'Uma plataforma de transparência que simplifica o acesso a informações sobre deputados federais brasileiros e sua atividade legislativa.',
+                'project-fahren-title': 'fahren',
+                'project-fahren-tag': 'projeto escolar',
+                'project-fahren-desc': 'Uma plataforma de listagem de veículos que conecta compradores e vendedores através de contato direto e negociações independentes.',
+                'btn-github': 'ver github',
+                'about-title': 'sobre',
+                'about-subtitle': 'sobre mim',
+                'about-intro': 'Oi, sou Kelwin Felipe Rocha Silva de São Paulo, Brasil. Atualmente estou estudando Desenvolvimento de Software Multiplataforma na Fatec e expandindo minhas habilidades em desenvolvimento web full-stack. Gosto de construir projetos, explorar novas tecnologias e transformar ideias em aplicações reais.',
+                'about-values': 'Gosto de sair da minha zona de conforto, aprender coisas novas e enfrentar desafios de frente. Seja trabalhando independentemente ou como parte de um time, valoro comunicação, persistência e a capacidade de me adaptar e continuar melhorando.',
+                'btn-resume': 'ver currículo <i class="bi bi-file-earmark-text"></i>',
+                'skill-frontend': 'frontend',
+                'skill-backend': 'backend',
+                'skill-database': 'banco de dados',
+                'skill-tools': 'ferramentas',
+                'skill-design': 'design',
+                'footer-greeting': 'diga olá 👋',
+                'footer-subtitle': 'aberto a novos projetos, parcerias criativas ou apenas conexões legais.',
+                'footer-linkedin': 'linkedin',
+                'footer-github': 'github',
+                'footer-resume': 'currículo',
+                'footer-copy': '© 2026 kelwin'
+            },
+            en: {
+                'nav-home': 'home',
+                'nav-projects': 'projects',
+                'nav-about': 'about',
+                'nav-language': 'language: português 🇧🇷',
+                'home-greeting': 'hey, I\'m',
+                'home-skill': 'building',
+                'home-role': 'full-stack web applications',
+                'home-status': 'available for projects',
+                'projects-title': 'selected projects',
+                'project-notepad-title': 'notepad',
+                'project-notepad-tag': 'college project',
+                'project-notepad-desc': 'A simple online note-sharing platform where users can create and access notes through a unique code.',
+                'project-events-title': 'events',
+                'project-events-tag': 'school project',
+                'project-events-desc': 'A web platform designed to help people discover and explore cultural events and activities.',
+                'project-radar-title': 'radar cidadão',
+                'project-radar-tag': 'college project',
+                'project-radar-desc': 'A transparency platform that simplifies access to information about Brazilian federal deputies and their legislative activity.',
+                'project-fahren-title': 'fahren',
+                'project-fahren-tag': 'school project',
+                'project-fahren-desc': 'A vehicle listing platform that connects buyers and sellers through direct contact and independent negotiations.',
+                'btn-github': 'see github',
+                'about-title': 'about me',
+                'about-subtitle': 'about me',
+                'about-intro': 'Hi, I\'m Kelwin Felipe Rocha Silva from São Paulo, Brazil. I\'m currently studying Multiplatform Software Development at Fatec and expanding my skills in full-stack web development. I enjoy building projects, exploring new technologies, and turning ideas into real applications.',
+                'about-values': 'I enjoy stepping out of my comfort zone, learning new things, and tackling challenges head-on. Whether working independently or as part of a team, I value communication, persistence, and the ability to adapt and keep improving.',
+                'btn-resume': 'see my resume <i class="bi bi-file-earmark-text"></i>',
+                'skill-frontend': 'frontend',
+                'skill-backend': 'backend',
+                'skill-database': 'database',
+                'skill-tools': 'tools',
+                'skill-design': 'design',
+                'footer-greeting': 'say hello 👋',
+                'footer-subtitle': 'open to new projects, creative partnerships, or just cool connections.',
+                'footer-linkedin': 'linkedin',
+                'footer-github': 'github',
+                'footer-resume': 'resume',
+                'footer-copy': '© 2026 kelwin'
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('language') || 'pt';
+
+        window.mudarIdioma = function() {
+            currentLanguage = currentLanguage === 'pt' ? 'en' : 'pt';
+            localStorage.setItem('language', currentLanguage);
+            document.documentElement.lang = currentLanguage;
+            atualizarTextos();
+        }
+
+        function atualizarTextos() {
+            // Atualizar textos com data-i18n-key
+            document.querySelectorAll('[data-i18n-key]').forEach(el => {
+                const key = el.getAttribute('data-i18n-key');
+                const text = translations[currentLanguage][key];
+                if (text) {
+                    if (el.tagName === 'BUTTON' || el.tagName === 'A') {
+                        el.innerHTML = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+
+            // Atualizar data-navbar
+            document.querySelectorAll('[data-i18n-navbar-key]').forEach(el => {
+                const key = el.getAttribute('data-i18n-navbar-key');
+                const text = translations[currentLanguage][key];
+                if (text) {
+                    el.setAttribute('data-navbar', text);
+                }
+            });
+
+            // Atualizar destaque EN/PT
+            const langButton = document.querySelector('[onclick="mudarIdioma()"]');
+            if (langButton) {
+                const enSpan = langButton.querySelector('span:nth-of-type(1)');
+                const ptSpan = langButton.querySelector('span:nth-of-type(2)');
+                
+                if (currentLanguage === 'en') {
+                    // Destaque em EN
+                    enSpan.className = 'dark:text-highlight text-texto group-hover/btn:text-texto/50 group-hover/btn:drop-shadow-none group-hover/btn:bg-none group-hover/btn:font-normal font-semibold transition-all duration-300';
+                    ptSpan.className = 'text-texto-muted group-hover/btn:text-texto group-hover/btn:font-semibold transition-all duration-300';
+                } else {
+                    // Destaque em PT
+                    enSpan.className = 'text-texto-muted group-hover/btn:text-texto/50 group-hover/btn:drop-shadow-none group-hover/btn:bg-none group-hover/btn:font-normal font-semibold transition-all duration-300';
+                    ptSpan.className = 'dark:text-highlight text-texto group-hover/btn:text-texto group-hover/btn:font-semibold transition-all duration-300';
+                }
+            }
+        }
+
+        function mudarTema(btn) {
+            const html = document.documentElement
+            
+            html.classList.toggle('dark');
+            
+            const dark = html.classList.contains('dark')
+            
+            const darkIcons = document.querySelectorAll('.dark-icon');
+            const lightIcons = document.querySelectorAll('.light-icon');
+            
+            darkIcons.forEach(icon => {
+                if (dark) {
+                    icon.classList.remove('hidden');
+                } else {
+                    icon.classList.add('hidden');
+                }
+            });
+            
+            lightIcons.forEach(icon => {
+                if (dark) {
+                    icon.classList.add('hidden');
+                } else {
+                    icon.classList.remove('hidden');
+                }
+            });
+            
+            if (dark) {
+                btn.setAttribute('data-navbar', 'theme: dark');
+            } else {
+                btn.setAttribute('data-navbar', 'theme: light');
+            }
+        }
+
+        function copiarEmail(btn) {
+            const email = 'kelwinrocha5@gmail.com';
+            const textoOriginal = btn.innerHTML;
+            
+            navigator.clipboard.writeText(email).then(() => {
+                btn.innerHTML = currentLanguage === 'pt' ? 'email copiado :)' : 'email copied :)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = textoOriginal;
+                }, 2000);
+            });
+        }
+
+        // Inicializar idioma ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.lang = currentLanguage;
+            atualizarTextos();
+        });
+    </script>
 </head>
 
-<body class="bg-black relative">
-    <!-- <div class="fixed w-full h-screen text-white z-2">
-        <div class="size-full bg-black/20 backdrop-blur-[2px] flex items-center justify-center">
-            <div class="bg-black/70 rounded-2xl size-fit backdrop-blur-md drop-shadow-lg drop-shadow-white/10 p-5 max-w-2/5">
-                <h3>Título teste</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, veritatis dolores temporibus deleniti quibusdam ipsa dolore suscipit exercitationem itaque doloremque, ullam rerum, voluptatum laborum nam eum maiores! Necessitatibus, modi doloremque!</p>
-            </div>
-        </div>
-    </div> -->
-    <div class="fixed h-screen text-white p-5 flex z-1">
-        <div
-            class="border-2 bg-black/20 backdrop-blur-md space-y-2 my-auto group/nav border-white/50 w-fit h-fit p-2 rounded-full hover:rounded-2xl ">
-            <a href="#home"
-                class="flex items-center group/link hover:bg-white opacity-50 p-1 rounded-lg hover:opacity-100 hover:text-black gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd"
-                        d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
-                        clip-rule="evenodd" />
-                </svg>
-
-
-                <div class="hidden group-hover/nav:inline">Home</div>
-            </a>
-            <a href="#sobre"
-                class="flex items-center group/link hover:bg-white opacity-50 p-1 rounded-lg hover:opacity-100 hover:text-black gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd"
-                        d="M10 2.5c-1.31 0-2.526.386-3.546 1.051a.75.75 0 0 1-.82-1.256A8 8 0 0 1 18 9a22.47 22.47 0 0 1-1.228 7.351.75.75 0 1 1-1.417-.49A20.97 20.97 0 0 0 16.5 9 6.5 6.5 0 0 0 10 2.5ZM4.333 4.416a.75.75 0 0 1 .218 1.038A6.466 6.466 0 0 0 3.5 9a7.966 7.966 0 0 1-1.293 4.362.75.75 0 0 1-1.257-.819A6.466 6.466 0 0 0 2 9c0-1.61.476-3.11 1.295-4.365a.75.75 0 0 1 1.038-.219ZM10 6.12a3 3 0 0 0-3.001 3.041 11.455 11.455 0 0 1-2.697 7.24.75.75 0 0 1-1.148-.965A9.957 9.957 0 0 0 5.5 9c0-.028.002-.055.004-.082a4.5 4.5 0 0 1 8.996.084V9.15l-.005.297a.75.75 0 1 1-1.5-.034c.003-.11.004-.219.005-.328a3 3 0 0 0-3-2.965Zm0 2.13a.75.75 0 0 1 .75.75c0 3.51-1.187 6.745-3.181 9.323a.75.75 0 1 1-1.186-.918A13.687 13.687 0 0 0 9.25 9a.75.75 0 0 1 .75-.75Zm3.529 3.698a.75.75 0 0 1 .584.885 18.883 18.883 0 0 1-2.257 5.84.75.75 0 1 1-1.29-.764 17.386 17.386 0 0 0 2.078-5.377.75.75 0 0 1 .885-.584Z"
-                        clip-rule="evenodd" />
-                </svg>
-
-
-                <div class="hidden group-hover/nav:inline">Sobre mim</div>
-            </a>
-            <a href="#projetos"
-                class="flex items-center group/link hover:bg-white opacity-50 p-1 rounded-lg hover:opacity-100 hover:text-black gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd"
-                        d="M3.25 3A2.25 2.25 0 0 0 1 5.25v9.5A2.25 2.25 0 0 0 3.25 17h13.5A2.25 2.25 0 0 0 19 14.75v-9.5A2.25 2.25 0 0 0 16.75 3H3.25Zm.943 8.752a.75.75 0 0 1 .055-1.06L6.128 9l-1.88-1.693a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 0 1-1.06-.055ZM9.75 10.25a.75.75 0 0 0 0 1.5h2.5a.75.75 0 0 0 0-1.5h-2.5Z"
-                        clip-rule="evenodd" />
-                </svg>
-
-                <div class="hidden group-hover/nav:inline">Projetos</div>
-            </a>
-            <a href="#certificados"
-                class="flex items-center group/link hover:bg-white opacity-50 p-1 rounded-lg hover:opacity-100 hover:text-black gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd"
-                        d="M9.664 1.319a.75.75 0 0 1 .672 0 41.059 41.059 0 0 1 8.198 5.424.75.75 0 0 1-.254 1.285 31.372 31.372 0 0 0-7.86 3.83.75.75 0 0 1-.84 0 31.508 31.508 0 0 0-2.08-1.287V9.394c0-.244.116-.463.302-.592a35.504 35.504 0 0 1 3.305-2.033.75.75 0 0 0-.714-1.319 37 37 0 0 0-3.446 2.12A2.216 2.216 0 0 0 6 9.393v.38a31.293 31.293 0 0 0-4.28-1.746.75.75 0 0 1-.254-1.285 41.059 41.059 0 0 1 8.198-5.424ZM6 11.459a29.848 29.848 0 0 0-2.455-1.158 41.029 41.029 0 0 0-.39 3.114.75.75 0 0 0 .419.74c.528.256 1.046.53 1.554.82-.21.324-.455.63-.739.914a.75.75 0 1 0 1.06 1.06c.37-.369.69-.77.96-1.193a26.61 26.61 0 0 1 3.095 2.348.75.75 0 0 0 .992 0 26.547 26.547 0 0 1 5.93-3.95.75.75 0 0 0 .42-.739 41.053 41.053 0 0 0-.39-3.114 29.925 29.925 0 0 0-5.199 2.801 2.25 2.25 0 0 1-2.514 0c-.41-.275-.826-.541-1.25-.797a6.985 6.985 0 0 1-1.084 3.45 26.503 26.503 0 0 0-1.281-.78A5.487 5.487 0 0 0 6 12v-.54Z"
-                        clip-rule="evenodd" />
-                </svg>
-
-
-                <div class="hidden group-hover/nav:inline">Certificados</div>
-            </a>
-        </div>
+<body class="bg-fundo text-texto relative">
+    <div class="fixed -z-50 w-dvw h-dvh">
+        <div class="absolute size-600 bg-[#F4F4F6]/12 rounded-b-full -translate-x-1/2 -translate-y-1/2 left-1/2 -top-275 blur-[200px] mix-blend-plus-lighter"></div>
     </div>
-    <main>
-        <div id="home" class="flex items-center justify-center h-screen">
-            <div class="text-white w-min">
-                <p class="whitespace-nowrap text-white/70">Prazer, sou o</p>
-                <h1 class="font-black text-8xl sm:whitespace-nowrap serif">Kelwin <span
-                        class="text-shadow-[0_0_3px_white] text-black">Silva</span></h1>
-                <p class="text-right tracking-tight text-white/70">
-                    Cursando Desenvolvimento de Software Multiplataforma
-                </p>
+    <header class="fixed z-100 w-screen h-fit flex p-5">
+        <div class="mx-auto flex bg-fundo/50 border gap-10 hover:gap-12 group border-borda p-1 rounded-full text-lg backdrop-blur-sm shadow-lg transition-all duration-300 ease-in-out items-center">
+            <nav class="flex justify-between gap-4 hover:gap-6 group-hover:gap-6 ease-in-out transition-all duration-300 [&>a]:py-1 [&>a]:px-3 [&>a]:hover:px-5 [&>a]:rounded-full [&>a]:hover:bg-texto/10 [&>a]:lowercase [&>a]:ease-in-out [&>a]:transition-all [&>a]:duration-300 [&>a]:relative">
+                <a href="#home" data-navbar="home" data-i18n-navbar-key="nav-home"><i class="bi bi-house icon-outline"></i><i class="bi bi-house-fill icon-fill"></i></a>
+                <a href="#projects" data-navbar="projects" data-i18n-navbar-key="nav-projects"><i class="bi bi-folder icon-outline"></i><i class="bi bi-folder-fill icon-fill"></i></a>
+                <a href="#about" data-navbar="about" data-i18n-navbar-key="nav-about"><i class="bi bi-person icon-outline"></i><i class="bi bi-person-fill icon-fill"></i></a>
+            </nav>
+            <div class="flex gap-3 group-hover:gap-5 ease-in-out transition-all duration-300">
+                <button onclick="mudarIdioma()" type="button" data-navbar="language: english 🇺🇸" data-i18n-navbar-key="nav-language" class="px-3 hover:px-5 py-1 rounded-full ease-in-out transition-all duration-300 text-texto-muted text-base group/btn cursor-pointer hover:bg-texto/10 border-none bg-transparent"><span class="dark:text-highlight text-texto group-hover/btn:text-texto/50 group-hover/btn:drop-shadow-none  group-hover/btn:bg-none group-hover/btn:font-normal font-semibold transition-all duration-300">EN</span> / <span class="text-texto-muted group-hover/btn:text-texto group-hover/btn:font-semibold transition-all duration-300">PT</span></button>
+                <button onclick="mudarTema(this)" type="button" data-navbar="theme: dark" class="px-3 hover:px-5 py-1 rounded-full ease-in-out transition-all duration-300 text-base group/btn cursor-pointer hover:bg-texto/10"><i class="dark-icon bi bi-moon icon-outline"></i><i class="dark-icon bi bi-moon-fill icon-fill"></i><i class="light-icon hidden bi bi-sun icon-outline"></i><i class="light-icon hidden bi bi-sun-fill icon-fill"></i></button>
             </div>
         </div>
-        <div id="sobre" class="h-screen py-16">
-            <div class="text-white mx-[10rem] 2xl:mx-[30rem] flex gap-20 h-full">
-                <div class="w-1/2 flex justify-center flex-col">
-                    <h2 class="text-4xl font-bold mb-5">Sobre mim</h2>
-                    <p class="text-md text-white/70 border-l-3 border-white/50 pl-5">
-                        Olá! Meu nome é <span class="font-bold">Kelwin Felipe Rocha Silva</span>, tenho <span
-                            class="font-bold">18</span> anos e sou estudante de <span
-                            class="bg-[#090909] border-1 border-white/40 p-1 rounded-lg italic transition-all duration-100 ease-linear hover:border-white/50 hover:font-bold"
-                            title="Desenvolvimento de Software Multiplataforma">DSM</span> na <span
-                            class="bg-[#090909] border-1 border-white/40 p-1 rounded-lg italic transition-all duration-100 ease-linear hover:border-white/50 hover:font-bold"
-                            title="FATEC - Prof. Jessen Vidal">FATEC</span> de <span
-                            class="bg-[#090909] border-1 border-white/40 p-1 rounded-lg italic transition-all duration-100 ease-linear hover:border-white/50 hover:font-bold"
-                            title="São José dos Campos">SJC</span>. Gosto muito de tecnologia, e atualmente ando
-                        aprendendo sobre: <span class="font-bold">Python</span>, <span class="font-bold">HTML</span>,
-                        <span class="font-bold">CSS</span>, <span class="font-bold">Flask</span>, <span
-                            class="font-bold">Bootstrap</span>, <span class="font-bold">Tailwind</span>, <span
-                            class="font-bold">MySQL</span>, <span class="font-bold">Git</span> e <span
-                            class="font-bold">GitHub.</span> Meu objetivo atual é conquistar minha primeira oportunidade de <span class="font-bold">estágio</span>, onde eu consiga aprender e crescer profissionalmente, e futuramente me tornar um desenvolvedor <span class="font-bold">Full-Stack</span>.
-                    </p>
-                    <div class="flex justify-between text-white mt-5 items-center">
-                        <div class="flex gap-3">
-                            <a class="border-1 border-black hover:border-white/50 p-2 rounded-full size-fit transition-all duration-300 ease-in-out"
-                                href="https://www.linkedin.com/in/kersilva">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    viewBox="0 0 16 16" class="size-5">
-                                    <path
-                                        d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
-                                </svg>
-                            </a>
-                            <a class="border-1 border-black hover:border-white/50 p-2 rounded-full size-fit transition-all duration-300 ease-in-out"
-                                href="https://github.com/kersilva">
-                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" class="size-5">
-                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)"
-                                            fill="currentColor">
-                                            <g id="icons" transform="translate(56.000000, 160.000000)">
-                                                <path
-                                                    d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"
-                                                    id="github-[#142]">
-
-                                                </path>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                            </a>
-                            <a class="border-1 border-black hover:border-white/50 p-2 rounded-full size-fit transition-all duration-300 ease-in-out"
-                                href="mailto:kelwinrocha5@gmail.com">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6">
-                                    <path
-                                        d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-                                    <path
-                                        d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
-                                </svg>
-
-                            </a>
+    </header>
+    <main class="flex flex-col gap-20 [&>section]:max-w-dvw  [&>section]:mx-auto [&>section]:px-10 py-10 [&>section]:gap-7">
+        <section id="home" class="flex flex-col justify-center items-center text-3xl lg:text-4xl xl:text-5xl text-center min-h-[85dvh]">
+            <h1 class="text-wrap w-[90dvw] lg:w-[70%] relative max-w-full text-texto-muted">
+                <span data-i18n-key="home-greeting">hey, I'm</span>
+                <span class="relative inline-flex items-center p-0.5 border mx-1 bg-fundo/50 backdrop-blur-[1px] border-texto/30 rounded-xl -rotate-5 hover:scale-150 hover:rotate-0 transition-transform duration-300 ease-in-out hover:border-texto/50 cursor-pointer z-50">
+                    <img src="https://github.com/kersilva.png" alt="Kelwin's profile picture" class="size-8 lg:size-10 rounded-lg">
+                </span>
+                <span class="dark:text-highlight text-texto font-bold">kelwin</span>,
+                <span data-i18n-key="home-skill">building</span> 
+                <span class="dark:text-highlight text-texto font-bold" data-i18n-key="home-role">full-stack web applications</span>
+            </h1>
+            <div class="text-base flex items-center justify-center bg-fundo/5 border border-borda px-3 py-1 rounded-full gap-3 text-texto relative">
+                <span class="relative flex size-2">
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-55"></span>
+                    <span class="relative inline-flex size-2 rounded-full bg-green-500 shadow-[0_0_12px_#22c55e]"></span>
+                </span>
+                <span data-i18n-key="home-status">available for projects</span> 
+            </div>
+        </section>
+        <section id="projects" class="flex flex-col">
+            <div class="flex items-center gap-5 text-xl text-texto-muted/70 mb-10">
+                <span data-i18n-key="projects-title">selected projects</span>
+                <div class="h-px flex-1 bg-borda/70"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lowercase gap-3
+            [&_.btn-github]:bg-fundo [&_.btn-github]:p-2 [&_.btn-github]:border [&_.btn-github]:border-borda/70 [&_.btn-github]:text-center [&_.btn-github]:rounded-lg [&_.btn-github]:flex [&_.btn-github]:items-center [&_.btn-github]:justify-center [&_.btn-github]:gap-3
+            
+            [&_.btn-github]:before:content-[''] [&_.btn-github]:before:absolute [&_.btn-github]:before:top-1/2 [&_.btn-github]:before:left-1/2 [&_.btn-github]:before:scale-0 [&_.btn-github]:before:-translate-1/2 [&_.btn-github]:before:rounded-full [&_.btn-github]:before:aspect-square [&_.btn-github]:before:w-full [&_.btn-github]:before:bg-white/5 [&_.btn-github]:before:transition-all [&_.btn-github]:before:duration-150 [&_.btn-github]:before:ease-in-out
+            
+            [&_.btn-github]:group-hover:before:-translate-1/2 [&_.btn-github]:group-hover:before:scale-100
+            ">
+            <a href="https://github.com/kersilva/desafio4" target="_blank" class="flex flex-col justify-between bg-superficie/25 min-h-60 rounded-xl p-2 border border-borda/70 gap-2 group">
+                <div class="dark:bg-superficie/50 bg-borda/10 rounded-lg aspect-16/9 overflow-hidden flex items-end justify-center">
+                    <img src="/img/projetos/def4.png" alt="" class="rounded-lg h-[90%] group-hover:scale-105 transition-transform duration-200 ease-in-out">
+                </div>
+                <div class="flex my-3 mx-2">                        
+                    <div class="flex flex-col w-full">
+                        <div class="flex justify-between">
+                            <h3 class="text-xl" data-i18n-key="project-notepad-title">notepad</h3>
+                            <span class="text-sm text-texto-muted" data-i18n-key="project-notepad-tag">college project</span>
                         </div>
-                        <a href="pdf/cv_kelwin.pdf" target="_blank"
-                            class="flex p-2 bg-white hover:bg-white/90  text-black rounded-full items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-5">
-                                <path fill-rule="evenodd"
-                                    d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875Zm5.845 17.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72 1.72V12a.75.75 0 0 0-1.5 0v4.19l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z"
-                                    clip-rule="evenodd" />
-                                <path
-                                    d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-                            </svg>
-
-                            Ver Currículo
-                        </a>
+                        <span class="text-texto-muted text-base" data-i18n-key="project-notepad-desc">
+                            A simple online note-sharing platform where users can create and access notes through a unique code.
+                        </span>
+                    </div>
+                    <div class="ml-auto text-sm text-texto-muted">
                     </div>
                 </div>
-                <div class="w-1/2 flex items-center">
-                    <img src="https://github.com/kersilva.png" alt="Foto do perfil do GitHub"
-                        class="w-full rounded-xl grayscale hover:grayscale-0 contrast-[1.05] hover:contrast-100  transition-all duration-300 ease-linear -rotate-2 hover:rotate-2">
+                <div class="btn-github">
+                    <span data-i18n-key="btn-github">see github</span> <i class="bi bi-github"></i>
+                </div>
+            </a>
+            <a href="https://github.com/kelwin3ds/webapp" target="_blank" class="flex flex-col justify-between bg-superficie/25 min-h-60 rounded-xl p-2 border border-borda/70 gap-2 group">
+                <div class="dark:bg-superficie/50 bg-borda/10 rounded-lg aspect-16/9 overflow-hidden flex items-center justify-center">
+                    <img src="/img/projetos/webapp.png" alt="" class="rounded-lg shadow-lg/30 group-hover:scale-105 transition-transform duration-200 ease-in-out max-w-3/4">
+                </div>
+                <div class="flex my-3 mx-2">                        
+                    <div class="flex flex-col w-full">
+                        <div class="flex justify-between">
+                            <h3 class="text-xl" data-i18n-key="project-events-title">events</h3>
+                            <span class="text-sm text-texto-muted" data-i18n-key="project-events-tag">school project</span>
+                        </div>
+                        <span class="text-texto-muted text-base" data-i18n-key="project-events-desc">
+                            A web platform designed to help people discover and explore cultural events and activities.
+                        </span>
+                    </div>
+                    <div class="ml-auto text-sm text-texto-muted">
+                    </div>
+                </div>
+                <div class="btn-github">
+                    <span data-i18n-key="btn-github">see github</span> <i class="bi bi-github"></i>
+                </div>
+            </a>
+            <a href="https://github.com/APILumina/API1_DSM_Lumina" target="_blank" class="flex flex-col justify-between bg-superficie/25 min-h-60 rounded-xl p-2 border border-borda/70 gap-2 group">
+                <div class="dark:bg-superficie/50 bg-borda/10 rounded-lg aspect-16/9 overflow-hidden flex items-center justify-center">
+                    <img src="/img/projetos/radar-cidadao.png" alt="" class="rounded-lg shadow-lg/30 group-hover:scale-105 transition-transform duration-200 ease-in-out max-w-3/4">
+                </div>
+                <div class="flex my-3 mx-2">                        
+                    <div class="flex flex-col w-full">
+                        <div class="flex justify-between">
+                            <h3 class="text-xl" data-i18n-key="project-radar-title">radar cidadão</h3>
+                            <span class="text-sm text-texto-muted" data-i18n-key="project-radar-tag">college project</span>
+                        </div>
+                        <span class="text-texto-muted text-base" data-i18n-key="project-radar-desc">
+                            A transparency platform that simplifies access to information about Brazilian federal deputies and their legislative activity.
+                        </span>
+                    </div>
+                    <div class="ml-auto text-sm text-texto-muted">
+                    </div>
+                </div>
+                <div class="btn-github">
+                    <span data-i18n-key="btn-github">see github</span> <i class="bi bi-github"></i>
+                </div>
+            </a>
+            <a href="https://github.com/kersilva/TCC" target="_blank" class="flex flex-col justify-between bg-superficie/25 min-h-60 rounded-xl p-2 border border-borda/70 gap-2 group">
+                <div class="dark:bg-superficie/50 bg-borda/10 rounded-lg aspect-16/9 overflow-hidden flex items-center justify-center">
+                    <img src="/img/projetos/tcc.png" alt="" class="rounded-lg shadow-lg/30 group-hover:scale-105 transition-transform duration-200 ease-in-out max-w-3/4">
+                </div>
+                <div class="flex my-3 mx-2">                        
+                    <div class="flex flex-col w-full">
+                        <div class="flex justify-between">
+                            <h3 class="text-xl" data-i18n-key="project-fahren-title">fahren</h3>
+                            <span class="text-sm text-texto-muted" data-i18n-key="project-fahren-tag">school project</span>
+                        </div>
+                        <span class="text-texto-muted text-base" data-i18n-key="project-fahren-desc">
+                            A vehicle listing platform that connects buyers and sellers through direct contact and independent negotiations.
+                        </span>
+                    </div>
+                    <div class="ml-auto text-sm text-texto-muted">
+                    </div>
+                </div>
+                <div class="btn-github">
+                    <span class="z-10"><span data-i18n-key="btn-github">see github</span> <i class="bi bi-github"></i></span>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section id="about" class="flex flex-col w-full min-h-[65dvh]">
+        <div class="flex items-center gap-5 text-xl text-texto-muted/70 mb-10">
+            <span data-i18n-key="about-title">about me</span>
+            <div class="h-px flex-1 bg-borda/70"></div>
+        </div>
+        <div class="flex lg:px-10 flex-1 items-center gap-20 flex-wrap lg:flex-nowrap">
+            <div class="flex flex-col gap-5 w-full lg:max-w-2/5">
+                <h3 class="text-4xl font-bold" data-i18n-key="about-subtitle">about me</h3>
+                <p class="text-xl text-texto-muted lowercase" data-i18n-key="about-intro">Hi, I'm <span class="dark:text-highlight text-texto font-bold capitalize">Kelwin Felipe Rocha Silva</span> from <span class="dark:text-highlight text-texto font-bold capitalize">São Paulo, Brazil</span>
+                    . I'm currently studying <span class="dark:text-highlight text-texto font-bold">Multiplatform Software Development</span> at <span class="dark:text-highlight text-texto font-bold capitalize">Fatec</span> and expanding my skills in <span class="dark:text-highlight text-texto font-bold">full-stack web development</span>. I enjoy building projects, exploring new technologies, and turning ideas into real applications.
+                </p>
+                <p class="text-xl text-texto-muted lowercase" data-i18n-key="about-values">
+                    I enjoy <span class="dark:text-highlight text-texto font-bold">stepping out of my comfort zone</span>,
+                    <span class="dark:text-highlight text-texto font-bold">learning new things</span>, and
+                    <span class="dark:text-highlight text-texto font-bold">tackling challenges</span> head-on.
+                    Whether working independently or as part of a team, I value
+                    <span class="dark:text-highlight text-texto font-bold">communication</span>,
+                    <span class="dark:text-highlight text-texto font-bold">persistence</span>, and the ability to
+                    <span class="dark:text-highlight text-texto font-bold">adapt</span> and
+                    <span class="dark:text-highlight text-texto font-bold">keep improving</span>.
+                </p>
+                <a href="https://drive.google.com/file/d/1Kk82ofHbdsqpudlx2uIZajN6bZfKExv2/view?usp=sharing" target="_blank" class="bg-texto mt-10 lg:w-fit text-lg text-fundo px-5 py-1 rounded-full transition-all duration-300 ease-in-out hover:bg-fundo hover:text-texto border" data-i18n-key="btn-resume">see my resume <i class="bi bi-file-earmark-text"></i></a>
+            </div>
+            <div class="flex flex-col w-full lg:max-w-3/5 [&_.tool>img]:w-6 [&_.tool>img]:md:w-8 [&_.tool>img]:lg:w-10">
+                <div class="flex flex-col w-full gap-5 mb-5 text-texto-muted/70 text-xl">
+                    <div class="flex w-full items-center gap-5">
+                        <span data-i18n-key="skill-frontend">frontend</span>
+                        <div class="h-px flex-1 bg-borda/70"></div>
+                    </div>
+                    <div class="flex gap-7 font-semibold flex-wrap">
+                        <div class="tool">
+                            <img src="/img/hardskills/frontend/html.png" alt="html">
+                            <span>html</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/frontend/css.png" alt="css">
+                            <span>css</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/frontend/js.png" alt="javascript">
+                            <span>javascript</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/frontend/jquery.png" alt="jquery" class="dark:invert">
+                            <span>jquery</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/frontend/tailwind.png" alt="tailwind">
+                            <span>tailwind</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/frontend/bootstrap.png" alt="bootstrap">
+                            <span>bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col w-full gap-5 mb-5 text-texto-muted/70 text-xl">
+                    <div class="flex w-full items-center gap-5">
+                        <span data-i18n-key="skill-backend">backend</span>
+                        <div class="h-px flex-1 bg-borda/70"></div>
+                    </div>
+                    <div class="flex gap-7 font-semibold flex-wrap">
+                        <div class="tool">
+                            <img src="/img/hardskills/backend/php.png" alt="php">
+                            <span>php</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/backend/python.png" alt="python">
+                            <span>python</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/backend/flask.png" alt="flask" class="dark:invert">
+                            <span>flask</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col w-full gap-5 mb-5 text-texto-muted/70 text-xl">
+                    <div class="flex w-full items-center gap-5">
+                        <span data-i18n-key="skill-database">database</span>
+                        <div class="h-px flex-1 bg-borda/70"></div>
+                    </div>
+                    <div class="flex gap-7 font-semibold flex-wrap">
+                        <div class="tool">
+                            <img src="/img/hardskills/database/mysql.png" alt="mysql">
+                            <span>mysql</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/database/mariadb.png" alt="mariadb">
+                            <span>mariadb</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col w-full gap-5 mb-5 text-texto-muted/70 text-xl">
+                    <div class="flex w-full items-center gap-5">
+                        <span data-i18n-key="skill-tools">tools</span>
+                        <div class="h-px flex-1 bg-borda/70"></div>
+                    </div>
+                    <div class="flex gap-7 font-semibold flex-wrap">
+                        <div class="tool">
+                            <img src="/img/hardskills/tools/git.png" alt="git">
+                            <span>git</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/tools/docker.png" alt="docker">
+                            <span>docker</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/tools/aws.png" alt="aws" class="dark:invert-0 invert">
+                            <span>aws</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/tools/xampp.png" alt="xampp">
+                            <span>xampp</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col w-full gap-5 mb-5 text-texto-muted/70 text-xl">
+                    <div class="flex w-full items-center gap-5">
+                        <span data-i18n-key="skill-design">design</span>
+                        <div class="h-px flex-1 bg-borda/70"></div>
+                    </div>
+                    <div class="flex gap-7 font-semibold flex-wrap">
+                        <div class="tool">
+                            <img src="/img/hardskills/design/figma.png" alt="figma">
+                            <span>figma</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/design/photoshop.png" alt="photoshop">
+                            <span>photoshop</span>
+                        </div>
+                        <div class="tool">
+                            <img src="/img/hardskills/design/illustrator.png" alt="illustrator">
+                            <span>illustrator</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="projetos" class="h-screen py-16">
-            <div class="text-white mx-[10rem] 2xl:mx-[30rem]">
-                <h2 class="text-4xl font-bold mb-10">Projetos</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-5">
-                    <a href="https://github.com/kersilva/TCC"
-                        class="w-full h-full flex flex-col rounded-xl border-1 border-white/10 overflow-hidden hover:scale-[102%] hover:bg-white/10 transition-all duration-100 ease-linear">
-                        <img src="img/projetos/tcc.png" alt="TCC" class="w-full aspect-16/9">
-                        <div class="flex flex-col flex-1">
-                            <div class="p-4">
-                                <h3 class="text-lg xl:text-xl font-bold w-fit text-white">Fahren</h3>
-                                <p class="w-fit text-white/70 text-xs xl:text-sm">E-commerce de automóveis</p>
-
-                            </div>
-                            <div class="p-4 mt-auto border-t-1 border-white/10">
-                                <div class="bg-[#111111] rounded-full w-fit p-3 flex gap-2 items-center text-white">
-                                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" class="size-5">
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="Dribbble-Light-Preview"
-                                                transform="translate(-140.000000, -7559.000000)" fill="currentColor">
-                                                <g id="icons" transform="translate(56.000000, 160.000000)">
-                                                    <path
-                                                        d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"
-                                                        id="github-[#142]">
-
-                                                    </path>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    Repositório
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="https://github.com/kelwin3ds/webapp"
-                        class="w-full h-full flex flex-col rounded-xl border-1 border-white/10 overflow-hidden hover:scale-[102%] hover:bg-white/10 transition-all duration-100 ease-linear">
-                        <img src="img/projetos/webapp.png" alt="TCC" class="w-full aspect-16/9">
-                        <div class="flex flex-col flex-1">
-                            <div class="p-4">
-                                <h3 class="text-lg xl:text-xl font-bold w-fit text-white">Webapp</h3>
-                                <p class="w-fit text-white/70 text-xs xl:text-sm">Plataformas de eventos</p>
-                            </div>
-                            <div class="p-4 mt-auto border-t-1 border-white/10">
-                                <div class="bg-[#111111] rounded-full w-fit p-3 flex gap-2 items-center text-white">
-                                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" class="size-5">
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="Dribbble-Light-Preview"
-                                                transform="translate(-140.000000, -7559.000000)" fill="currentColor">
-                                                <g id="icons" transform="translate(56.000000, 160.000000)">
-                                                    <path
-                                                        d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"
-                                                        id="github-[#142]">
-
-                                                    </path>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    Repositório
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="https://github.com/APILumina/API1_DSM_Lumina"
-                        class="w-full h-full flex flex-col rounded-xl border-1 border-white/10 overflow-hidden hover:scale-[102%] hover:bg-white/10 transition-all duration-100 ease-linear">
-                        <img src="img/projetos/radar-cidadao.png" alt="TCC" class="w-full aspect-16/9">
-                        <div class="flex flex-col flex-1">
-                            <div class="p-4">
-                                <h3 class="text-lg xl:text-xl font-bold w-fit text-white">Radar Cidadão</h3>
-                                <p class="w-fit text-white/70 text-xs xl:text-sm">Monitoramento de deputados federais
-                                </p>
-
-                            </div>
-                            <div class="p-4 mt-auto border-t-1 border-white/10">
-                                <div class="bg-[#111111] rounded-full w-fit p-3 flex gap-2 items-center text-white">
-                                    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" class="size-5">
-                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="Dribbble-Light-Preview"
-                                                transform="translate(-140.000000, -7559.000000)" fill="currentColor">
-                                                <g id="icons" transform="translate(56.000000, 160.000000)">
-                                                    <path
-                                                        d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"
-                                                        id="github-[#142]">
-
-                                                    </path>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                    Repositório
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div id="certificados" class="h-screen py-16">
-            <div class="text-white mx-[10rem] 2xl:mx-[30rem]">
-                <h2 class="text-4xl font-bold mb-10">Certificados</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-5">
-                    <a href="pdf/saga.pdf" target="_blank"
-                        class="w-full h-full flex flex-col rounded-xl border-1 border-white/10 overflow-hidden hover:scale-[102%] hover:bg-white/10 transition-all duration-100 ease-linear relative">
-                        <div class="absolute bg-black/50 backdrop-blur-lg right-0 m-3 rounded-xl p-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-6">
-                                <path fill-rule="evenodd"
-                                    d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Zm-10.5 4.5a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                        </div>
-
-                        <img src="img/certificados/saga.jpg" alt="TCC" class="w-full aspect-16/9 object-cover object-top">
-                        <div class="flex flex-col flex-1">
-                            <div class="p-4">
-                                <h3 class="text-lg xl:text-xl font-bold w-fit text-white">SAGA</h3>
-                                <p class="w-fit text-white/70 text-xs xl:text-sm">Arte, Design, Animação e Games</p>
-
-                            </div>
-                        </div>
-                    </a>
-                    <a href="pdf/cuco-2023.pdf" target="_blank"
-                        class="w-full h-full flex flex-col rounded-xl border-1 border-white/10 overflow-hidden hover:scale-[102%] hover:bg-white/10 transition-all duration-100 ease-linear relative">
-                        <div class="absolute bg-black/50 backdrop-blur-lg right-0 m-3 rounded-xl p-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-6">
-                                <path fill-rule="evenodd"
-                                    d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Zm-10.5 4.5a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                        </div>
-                        <img src="img/certificados/cuco-2023.jpg" alt="TCC" class="w-full aspect-16/9 object-cover object-top">
-                        <div class="flex flex-col flex-1">
-                            <div class="p-4">
-                                <h3 class="text-lg xl:text-xl font-bold w-fit text-white">Medalha de Ouro - CUCO 2023</h3>
-                                <p class="w-fit text-white/70 text-xs xl:text-sm">Competição USP de Conhecimentos e Oportunidades</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="pdf/cuco-2024.pdf" target="_blank"
-                        class="w-full h-full flex flex-col rounded-xl border-1 border-white/10 overflow-hidden hover:scale-[102%] hover:bg-white/10 transition-all duration-100 ease-linear relative">
-                        <div class="absolute bg-black/50 backdrop-blur-lg right-0 m-3 rounded-xl p-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-6">
-                                <path fill-rule="evenodd"
-                                    d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Zm-10.5 4.5a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                        </div>
-                        <img src="img/certificados/cuco-2024.jpg" alt="TCC" class="w-full aspect-16/9 object-cover object-top">
-                        <div class="flex flex-col flex-1">
-                            <div class="p-4">
-                                <h3 class="text-lg xl:text-xl font-bold w-fit text-white">Medalha de Ouro - CUCO 2024</h3>
-                                <p class="w-fit text-white/70 text-xs xl:text-sm">Competição USP de Conhecimentos e Oportunidades</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="pdf/linguaskill.pdf" target="_blank"
-                        class="w-full h-full flex flex-col rounded-xl border-1 border-white/10 overflow-hidden hover:scale-[102%] hover:bg-white/10 transition-all duration-100 ease-linear relative">
-                        <div class="absolute bg-black/50 backdrop-blur-lg right-0 m-3 rounded-xl p-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-6">
-                                <path fill-rule="evenodd"
-                                    d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Zm-10.5 4.5a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-
-                        </div>
-                        <img src="img/certificados/linguaskill.jpg" alt="TCC" class="w-full aspect-16/9 object-cover object-top">
-                        <div class="flex flex-col flex-1">
-                            <div class="p-4">
-                                <h3 class="text-lg xl:text-xl font-bold w-fit text-white">Linguaskill Test Report</h3>
-                                <p class="w-fit text-white/70 text-xs xl:text-sm">Relatório de Proficiência Cambridge English</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </main>
+    </section>
+</main>
+<footer class="px-10 pt-20 pb-10 text-texto-muted text-lg lg:text-xl">
+    <button onclick="copiarEmail(this)" class="text-texto text-2xl lg:text-4xl font-bold mb-5 hover:ml-2 ml-0 transition-all duration-500 ease-out border-none bg-transparent cursor-pointer p-0" data-i18n-key="footer-greeting">say hello 👋</button>
+    <p data-i18n-key="footer-subtitle">open to new projects, creative partnerships, or just cool connections.</p>
+    <div class="h-px w-full bg-borda/70 my-10"></div>
+    <div class="flex">
+        <nav class="flex flex-wrap gap-10 [&>a]:hover:text-texto w-fit">
+            <a href="https://www.linkedin.com/in/kersilva" target="_blank" data-i18n-key="footer-linkedin">linkedin</a>
+            <a href="https://github.com/kersilva" target="_blank" data-i18n-key="footer-github">github</a>
+            <a href="https://drive.google.com/file/d/1Kk82ofHbdsqpudlx2uIZajN6bZfKExv2/view?usp=sharing" target="_blank" data-i18n-key="footer-resume">resume</a>
+        </nav>
+        <div class="ml-auto" data-i18n-key="footer-copy">© 2026 kelwin</div>
+    </div>
+</footer>
 </body>
 
 </html>

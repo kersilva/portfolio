@@ -2,5 +2,118 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 
 * {
-    font-family: "Montserrat", sans-serif;
+            font-family: 'Alpino', sans-serif;
+        }
+        
+        .boska {
+            font-family: 'Boska', serif;
+        }
+        
+        .link-hover {
+            position: relative;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            height: 4px;
+            width: 0;
+            background-color: var(--color-texto);
+            transition: all 300ms ease-in-out;
+        }
+        
+        .link-hover:hover::after {
+            width: 100%;
+        }
+        
+        [data-navbar] {
+            position: relative;
+        }
+        
+        [data-navbar]::before {
+            content: attr(data-navbar);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            border-radius: 9999px;
+            color: var(--color-texto);
+            font-size: 1rem;
+            transform: translateX(-50%) scale(0);
+            border-width: 1px;
+            background-color: rgb(from var(--color-fundo) r g b / 0.5);
+            border-color: var(--color-borda);
+            width: max-content;
+            padding: 0.2rem 1rem;
+            opacity: 0;
+            transition: all 300ms ease-in-out;
+        }
+        
+        [data-navbar]:hover::before {
+            opacity: 1;
+            bottom: -50px;
+            transform: translateX(-50%) scale(1);
+        }
+        
+        [data-navbar] i.icon-outline {
+            opacity: 1;
+            transition: all 300ms ease-in-out;
+        }
+        
+        [data-navbar] i.icon-fill {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            opacity: 0;
+            transition: all 300ms ease-in-out;
+        }
+
+        [data-navbar]:hover i.icon-outline {
+            opacity: 0;
+        }
+        
+        [data-navbar]:hover i.icon-fill {
+            opacity: 1;
+        }
+        
+        .btn div {
+    position: relative;
+}
+
+.btn i.icon-outline {
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+}
+
+.btn i.icon-fill {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+}
+
+.btn:hover i.icon-outline {
+    opacity: 0;
+}
+
+.btn:hover i.icon-fill {
+    opacity: 1;
+}
+
+
+        .btn-github {
+            position: relative;
+            overflow: hidden;
+        }
+
+.tool {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
